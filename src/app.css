@@ -1,0 +1,29 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 80vh 1fr;
+  grid-template-columns: 20vw 1fr 20vw;
+}
+
+.container>div {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: aliceblue;
+  border-radius: 1rem;
+}
+
+form,
+form>input {
+  width: calc(100% - 10px);
+  margin: 5px;
+}
+
+#chat {
+  max-height: 90%;
+  overflow-y: scroll;
+  margin: 5px;
+}
