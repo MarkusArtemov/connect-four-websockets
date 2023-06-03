@@ -1,4 +1,13 @@
-.container {
+/* index */
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* .container {
   height: 100%;
   width: 100%;
   display: grid;
@@ -14,10 +23,13 @@
   justify-content: space-between;
   background-color: aliceblue;
   border-radius: 1rem;
-}
+} */
 
-form,
-form>input {
+
+/* chat */
+
+/* #chat-form,
+#chat-form>input {
   width: calc(100% - 10px);
   margin: 5px;
 }
@@ -26,4 +38,88 @@ form>input {
   max-height: 90%;
   overflow-y: scroll;
   margin: 5px;
+} */
+
+/* game */
+
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  grid-template-rows: 20vh 80vh;
 }
+
+body{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  grid-template-rows: 20vh 80vh;
+}
+
+.game-information{
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.red-chip, .yellow-chip{
+  width: 10vmin;
+  height: 10vmin;
+  border-radius: 50%;
+  cursor: grab;
+}
+
+.not-active {
+  opacity: 0.5;
+}
+
+.red-chip{
+  background-color: red;
+
+}
+
+.yellow-chip{
+  background-color: yellow;
+}
+
+.game-status{
+  font-size: 5vmin;
+  font-family: sans-serif;
+}
+
+.game-field{
+  border-radius: 50%;
+  background-color: white;
+}
+
+.red{
+  background-color: red;
+}
+
+.yellow{
+  background-color: yellow;
+}
+
+
+.game-board{
+  display: grid;
+  place-content: center;
+  width: 80vmin;
+  height: 70vmin;
+  grid-template-columns: repeat(7, 10vmin);
+  grid-template-rows: repeat(6, 10vmin);
+  gap: 1vmin;
+  background-color: rgb(33, 50, 173);
+}
+
+
+
+
+
+
+
+
+
+
