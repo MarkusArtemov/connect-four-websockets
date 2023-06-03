@@ -4,6 +4,9 @@ export function setupGame(){
     const redChip = document.querySelector('.red-chip');
     const yellowChip = document.querySelector('.yellow-chip');
     const fields = document.querySelectorAll('.game-field');
+    const restartButton = document.querySelector('.restartButton');
+    const popupContainer = document.querySelector('.popup-container');
+
     const NUMBER_OF_COLUMNS = 7;
     const NUMBER_OF_ROWS = 6;
     
@@ -38,15 +41,41 @@ export function setupGame(){
       }
       if (insertedRow === -1) {
         return;
+      } 
+      if (checkWin(insertedRow, column) || checkDraw()) { 
+        showPopup()
+        return;
+      }  
+        changeTurn();
       }
-      if (checkWin(insertedRow, column)) {
-        console.log("win");
+    
 
-      } else if (checkDraw()) {
-        console.log('draw');
+    function showPopup(){
+      popupContainer.classList.add("setVisible");
+      document.querySelector('.winning-message').textContent = getWinningMessage();
+      restartButton.addEventListener("click",function(){
+       restartGame();
+      });
       }
-      changeTurn();
-    }
+
+      function restartGame(){
+        fields.forEach((field) =>{
+          if(field.classList.length === 2){
+            field.classList.remove('yellow');
+            field.classList.remove('red');
+          }
+          popupContainer.classList.remove('setVisible');
+          !redTurn && changeTurn();
+          
+        })
+      }
+
+
+      function getWinningMessage(){
+        return checkDraw() ? 
+        'Unentschieden' : redTurn ? 
+        "Rot hat gewonnen" : "Gelb hat gewonnen";
+      }
     
     function checkWin(row, column) {
       const currentChip = redTurn ? 'red' : 'yellow';
