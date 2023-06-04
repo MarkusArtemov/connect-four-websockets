@@ -172,7 +172,32 @@ a {
   padding: 0.5rem 1rem;
 }
 
+#connectDiv {
 
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+#connectDiv > h2 {
+  margin-bottom: 5vw;
+  color: greenyellow;
+}
+
+#socketConnectB, #roomJoinB {
+  background-color: green;
+  padding: 1vw;
+  color: white;
+  margin: 0vw 5vw;
+}
+
+#socketDisconnectB, #roomLeaveB {
+  background-color: red;
+  padding: 1vw;
+  color: white;
+}
 
 
 

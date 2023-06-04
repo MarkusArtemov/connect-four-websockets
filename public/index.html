@@ -1,10 +1,12 @@
 <html>
+
 <head>
   <title>4 Wins</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <script defer type="module" src="./app.js"></script>
   <link rel="stylesheet" type="text/css" href="./app.css" />
 </head>
+
 <body>
   <header>
     <nav>
@@ -17,65 +19,73 @@
   </header>
 
   <div class="container">
+    <div id="connectDiv">
+      <button id="socketConnectB">Connect!</button>
+      <button id="socketDisconnectB" visibility="hidden">Disconnect!</button>
+      <button id="roomJoinB" visibility="hidden">Join Room!</button>
+      <button id="roomLeaveB" >Leave Room!</button>
+    </div>
     <div class="game">
-    <div class="game-information">
-      <div class="red-chip" draggable="true"></div>
-      <p class="game-status">Turn red</p>
-      <div class="yellow-chip" draggable="true"></div>
+      <div class="game-information">
+        <div class="red-chip" draggable="true"></div>
+        <p class="game-status">Turn red</p>
+        <div class="yellow-chip" draggable="true"></div>
+    </div>
+    
+    <div class="game-board">
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    
+    
+    <section class="popup-container">
+    <section class="popup">
+      <p class="winning-message"></p>
+      <button class="restartButton">Restart</button>
+    </section>
+    </section>
+    </div>
+    </div>
   </div>
-
-  <div class="game-board">
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-  <div class="game-field"></div>
-
-
-<section class="popup-container">
-  <section class="popup">
-    <p class="winning-message"></p>
-    <button class="restartButton">Restart</button>
-  </section>
-</section>
-</div>
-</div>
 </body>
+
 </html>

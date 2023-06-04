@@ -61,6 +61,10 @@ export function setup() {
         if (roomUsers[room].length < 2) {
           socket.join(room);
           roomUsers[room].push({ userID: socket.id, username: socket.username });
+          io.in(room).emit("user joined", {
+            userID: socket.id,
+            username: socket.username,
+          });
           socket.emit("join accept", { room, roomUsers: roomUsers[room] });
         } else {
           socket.emit("join reject", { error: "room full", room });
@@ -75,6 +79,10 @@ export function setup() {
       if (ROOMS.includes(room)) {
         socket.leave(room);
         roomUsers[room] = roomUsers[room].filter(({ userID }) => userID !== socket.id);
+        io.in(room).emit("user left", {
+          userID: socket.id,
+          username: socket.username,
+        });
         socket.emit("leave accept", { room });
       } else {
         socket.emit("leave reject", { error: "no such room", room });
@@ -88,6 +96,8 @@ export function setup() {
         from: socket.id,
       });
     });
+
+
 
     // leave room when disconnecting
     socket.on("disconnect", () => {
