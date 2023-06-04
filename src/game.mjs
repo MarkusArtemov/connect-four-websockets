@@ -8,6 +8,10 @@ export function setupGame(socket, assignedColor) {
   const restartButton = document.querySelector('.restartButton');
   const popupContainer = document.querySelector('.popup-container');
 
+  //Added consts///
+
+  ///end added consts//
+
   const NUMBER_OF_COLUMNS = 7;
   const NUMBER_OF_ROWS = 6;
 

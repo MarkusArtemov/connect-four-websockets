@@ -47,6 +47,15 @@ export function setup() {
       });
     });
 
+    //forward a room exclusive message from one user to all in room (including sender, as verification)
+    socket.on("room message", ({ content, room }) => {
+      if (ROOMS.includes(room)) {
+        io.in(room).emit("room message", { content, from: socket.id });
+      } else {
+        socket.emit("message failed", { error: "no such room", room });
+      }
+    });
+
     //forward public message to all users
     socket.on("public message", ({ content }) => {
       io.emit("public message", {

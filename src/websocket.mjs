@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 import { setupGame } from "./game.mjs";
+import { setupChat } from "./chat.mjs";
 
 export function setup() {
     // connection setting. do not autoconnect, we need to set username first
@@ -84,8 +85,11 @@ export function setup() {
             socket.emit("leave room", { room: "room1" });
         });
 
+        //TO-DO: What to do with routing? how to pass along color?
+        setupChat(socket, userList, room);
         if(roomUsers[0].userID === socket.id){
             setupGame(socket, "red");
+
         }else{
             setupGame(socket, "yellow");
         }
@@ -128,7 +132,6 @@ export function setup() {
     socket.on("user connected", (user) => {
         userList.push(user);
         //console.log("User connected: " + user.username);
-        //TO-DO: unlock game logic/board interaction!
     });
 
     socket.on("user joined", (user) => {
