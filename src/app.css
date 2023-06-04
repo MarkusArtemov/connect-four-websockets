@@ -7,29 +7,48 @@
   margin: 0;
 }
 
-
-/* .container {
-  height: 100%;
-  width: 100%;
+body{
+  width: 100vw;
+  height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 80vh 1fr;
-  grid-template-columns: 20vw 1fr 20vw;
+  place-content: center;
+  grid-template-rows: 15vh 1fr;
 }
 
-.container>div {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: aliceblue;
-  border-radius: 1rem;
-} */
+.container{
+  width: 100vw;
+  display: grid;
+  place-content: center;
+}
 
+header {
+  width: 100vw;
+  height: 15vh;
+  background-color: rgb(45, 36, 36);
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5vw;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
 
 /* chat */
 
-/* #chat-form,
+#chat-form,
 #chat-form>input {
   width: calc(100% - 10px);
   margin: 5px;
@@ -39,24 +58,16 @@
   max-height: 90%;
   overflow-y: scroll;
   margin: 5px;
-} */
-
-/* game */
-
-.container{
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  place-content: center;
-  grid-template-rows: 20vh 80vh;
 }
 
-body{
-  width: 100vw;
-  height: 100vh;
+ /* game */
+
+.game{
+  width: 100%;
+  height: 100%;
   display: grid;
   place-content: center;
-  grid-template-rows: 20vh 80vh;
+  grid-template-rows: 20% 80%;
 }
 
 .game-information{
@@ -66,8 +77,8 @@ body{
 }
 
 .red-chip, .yellow-chip{
-  width: 10vmin;
-  height: 10vmin;
+  width: 8vmin;
+  height: 8vmin;
   border-radius: 50%;
   cursor: grab;
 }
@@ -107,15 +118,13 @@ body{
 .game-board{
   display: grid;
   place-content: center;
-  width: 80vmin;
-  height: 70vmin;
-  grid-template-columns: repeat(7, 10vmin);
-  grid-template-rows: repeat(6, 10vmin);
+  width: 70vmin;
+  height: 60vmin;
+  grid-template-columns: repeat(7, 8vmin);
+  grid-template-rows: repeat(6, 8vmin);
   gap: 1vmin;
   background-color: rgb(33, 50, 173);
 }
-
-/* game popup */
 
 .popup-container {
   position: fixed;
