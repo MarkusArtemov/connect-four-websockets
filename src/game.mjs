@@ -84,8 +84,9 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
     let insertedRow = -1;
     for (let row = NUMBER_OF_ROWS - 1; row >= 0; row--) {
       const field = gameBoard.get(calculateCurrentIndex(row, column));
-      if (field.classList.length < 2) {
-        field.classList.add(currentChip);
+      if (!field.dataset.chip) {
+        field.dataset.chip = currentChip;
+        animateChipDrop(column, currentChip, row);
         insertedRow = row;
         break;
       }
@@ -98,7 +99,22 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
       return;
     }
     changeTurn();
+  }
 
+
+  function animateChipDrop(column, currentChip, insertedRow) {
+    for (let row = 0; row <= insertedRow; row++) {
+      setTimeout(() => {
+        const field = gameBoard.get(calculateCurrentIndex(row, column));
+        field.classList.add(currentChip);
+  
+        if (row < insertedRow) {
+          setTimeout(() => {
+            field.classList.remove(currentChip);
+          }, 500);
+        }
+      }, (row*100)); 
+    }
   }
 
 
@@ -117,14 +133,12 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
 
   function restartGame() {
     fields.forEach((field) => {
-      if (field.classList.length === 2) {
-        field.classList.remove('yellow');
-        field.classList.remove('red');
-      }
-      popupContainer.classList.remove('setVisible');
-      !redTurn && changeTurn();
-
-    })
+      field.dataset.chip = '';
+      field.classList.remove('yellow');
+      field.classList.remove('red');
+    });
+    popupContainer.classList.remove('setVisible');
+    !redTurn && changeTurn();
   }
 
 
@@ -153,7 +167,7 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
 
       while (currentRow >= 0 && currentRow < NUMBER_OF_ROWS && currentColumn >= 0 && currentColumn < NUMBER_OF_COLUMNS) {
         const field = gameBoard.get(calculateCurrentIndex(currentRow, currentColumn));
-        if (field.classList.contains(currentChip)) {
+        if (field.dataset.chip === currentChip) {
           chipCount++;
           if (chipCount === 4) {
             return true;
@@ -185,7 +199,7 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
   }
 
   function checkDraw() {
-    return [...gameBoard.values()].every((field) => field.classList.length === 2);
+    return [...gameBoard.values()].every((field) => field.dataset.chip);
   }
 
   function changeTurn() {
