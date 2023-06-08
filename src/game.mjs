@@ -7,6 +7,7 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
   const fields = document.querySelectorAll('.game-field');
   const restartButton = document.querySelector('.restartButton');
   const popupContainer = document.querySelector('.popup-container');
+  const winnerSound = document.getElementById('winnerSound');
 
   //Added consts///
 
@@ -96,6 +97,7 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
     }
     if (checkWin(insertedRow, column) || checkDraw()) {
       showPopup()
+      checkWin(insertedRow,column) && winnerSound.play();
       return;
     }
     changeTurn();
@@ -139,6 +141,8 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
     });
     popupContainer.classList.remove('setVisible');
     !redTurn && changeTurn();
+    winnerSound.pause();
+    winnerSound.currentTime = 0;
   }
 
 
