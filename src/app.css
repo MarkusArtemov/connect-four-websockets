@@ -15,10 +15,12 @@ body{
   grid-template-rows: 15vh 1fr;
 }
 
-.container{
+#container{
+  height: 100vh;
   width: 100vw;
   display: grid;
   place-content: center;
+  place-items: center;
 }
 
 header {
@@ -283,6 +285,82 @@ a {
 .chatForm > button:hover {
   opacity: 1;
 }
+
+
+/* lobby */
+
+
+h1.lobby {
+  color: #333;
+}
+
+.room-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  margin-top: 100px; 
+}
+
+.room {
+  display: grid;
+  background-color: #1a1717;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 1rem;
+  width: 50vw;
+  position: relative; 
+}
+
+.room {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.room:hover {
+  background-color: #c26578;
+  color: rgb(66, 66, 66);
+}
+
+
+/* home */
+
+.home {
+  width: 50vmin;
+  height: 50vmin;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10vmin;
+}
+
+.home p {
+  text-align: center;
+}
+
+.home .connectWithSocket {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.connectWithSocket:hover {
+  background-color: #45a049;
+}
+
+.connectWithSocket:active {
+  background-color: #3e8e41;
+}
+
 
 
 

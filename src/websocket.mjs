@@ -2,36 +2,14 @@ import { io } from "socket.io-client";
 import { setupGame } from "./game.mjs";
 import { setupChat } from "./chat.mjs";
 
-export function setup() {
-    // connection setting. do not autoconnect, we need to set username first
     const URL = "http://localhost:3001";
     const socket = io(URL, { autoConnect: false });
 
     let username; 
     let userList = [];
 
-    //////////////Temp Stuff? Waiting on router//////////////
-    const disconnectB = document.getElementById("socketDisconnectB");
-    const connectB = document.getElementById("socketConnectB");
-    const joinB = document.getElementById("roomJoinB");
-    const leaveB = document.getElementById("roomLeaveB");
-
-
-    disconnectB.style.visibility = "hidden";
-    joinB.style.visibility = "hidden";
-    leaveB.style.visibility = "hidden";
-
-    connectB.addEventListener("click", () =>{
-        //Attempt Connection
-        username = prompt("Please enter Username", "kalle");
-
-        
-        // provide username, then connect
-        socket.auth = { username };
-        socket.connect();
-    });
-    //////////////End of Waiting on Router//////////////
-
+export function setup() {
+    // connection setting. do not autoconnect, we need to set username first
 
     // function to get username for user id
     function getUsernameFromID(id) {
@@ -63,49 +41,25 @@ export function setup() {
     });
 
     socket.on("connect", () => {
-        console.log("Websocket Server listening on ws://127.0.0.1:3001")
-
-        connectB.style.visibility = "hidden";
-        disconnectB.style.visibility = "visible";
-        disconnectB.addEventListener("click", () => {
-            socket.disconnect();
+        console.log("läuft doch");
+        
         });
 
-        joinB.style.visibility = "visible";
-        joinB.addEventListener("click", () => {
-            socket.emit("join room", { room: "room1" }); //TO-DO: add lobby screen, add connect overlay for lobby. add room-option for lobby!
-        });
-
-    })
 
     socket.on("join accept", ({room, roomUsers}) => {
-        joinB.style.visibility = "hidden";
-        leaveB.style.visibility = "visible";
-        leaveB.addEventListener("click", () => {
-            socket.emit("leave room", { room: "room1" });
-        });
-
-        //TO-DO: What to do with routing? how to pass along color?
         setupChat(socket, userList, room);
         if(roomUsers[0].userID === socket.id){
             setupGame(socket, "red");
-
         }else{
             setupGame(socket, "yellow");
         }
     });
 
     socket.on("leave accept", () => {
-        joinB.style.visibility = "visible";
-        leaveB.style.visibility = "hidden";
     });
 
     socket.on("disconnect", (reason) => {
-        connectB.style.visibility = "visible";
-        disconnectB.style.visibility = "hidden";
-        joinB.style.visibility = "hidden";
-        leaveB.style.visibility = "hidden";
-        console.log("disconnected: " + reason);
+        console.log('Disconnected: ' + reason);
     });
 
     // error callback for connection errors
@@ -113,7 +67,7 @@ export function setup() {
         if (err.message === "invalid username") {
             console.log("no username provided!")
         }
-        console.log("Connection error: " + error);
+        console.log("Connection error: " + err);
     });
 
     /*
@@ -122,6 +76,7 @@ export function setup() {
     */
     socket.on("users", (users) => {
         userList = users;
+        setupChat(socket, userList, "public");
     });
 
 
@@ -144,45 +99,25 @@ export function setup() {
     })
 
     //////////////End Events//////////////
-
-
-
-
-
-    /*
-      After we have joined a room, we can send a game message to a room.
-      To define the content is up to us.
-      We can listen to game messages - we will also receive our own messages
-      - so we need to either ignore them or use them a trigger to update game and UI state.
-    */
-    //socket.emit("game message", { content: "Test", to: "room1" })
-
-    //////////////Chat Stuff //////////////
-    /*
-    /// -------------------------------------------------------------------------------------------------------
-    // From here on an example for using public messages (forwarded to all users, including ourselves) follows:
-
-    const chatForm = document.querySelector("#chat-form");
-    const chatInput = document.querySelector("#chat-input");
-    const chat = document.querySelector("#chat");
-
-    chatInput.focus();
-
-    chatForm.onsubmit = (event) => {
-        event.preventDefault();
-        const text = chatInput.value;
-        socket.emit("public message", { content: text })
-    };
-
-    // This is an example on how to react messages like "public message", "private message" or "game message"
-    socket.on("public message", ({ content, from }) => {
-        const p = document.createElement("p");
-        p.textContent = `${getUsernameFromID(from)}: ${content}`;
-        chat.appendChild(p);
-        chat.scroll({ top: chat.scrollHeight, behavior: "smooth" });
-        chatInput.value = "";
-    })*/
-
-    //////////////End Chat Stuff //////////////
     
+}
+
+
+export function joinRoom(roomName) {
+        socket.emit("join room", { room: roomName })
+  }
+
+export function leaveRoom(roomName) {
+        socket.emit("leave room", { room: roomName });
+  }
+
+  export function connectWithServer(){
+    if (socket.connected) {
+        console.log('Already connected');
+        return;
+    }
+    username = prompt("Please enter Username", "kalle");
+    socket.auth = { username };
+    socket.connect();
+    console.log("Connecting...");
 }

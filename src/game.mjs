@@ -1,4 +1,4 @@
-export function setupGame(socket, assignedColor) {
+export function setupGame(socket, assignedColor, currentUserList, room) {
 
   console.log("Setting up game...." + assignedColor);
   const gameStatus = document.querySelector('.game-status');
@@ -199,4 +199,11 @@ export function setupGame(socket, assignedColor) {
     redChip.classList.toggle('not-active');
   }
 }
+
+
+
+
+
+
+
 
