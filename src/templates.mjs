@@ -66,19 +66,20 @@ export const gameTemplate = `
 export const lobbyTemplate = `
 <h1>Lobby</h1>
 <div class="room-container">
-<a href="/game" router-link="/game" class="room">Room1</a>
-<a href="/game" router-link="/game" class="room">Room2</a>
-<a href="/game" router-link="/game" class="room">Room3</a>
-<a href="/game" router-link="/game" class="room">Room4</a>
-<a href="/" router-link="/" class="room">Disconnect</a>
-</div> `;
+  <a href="/game/room1" router-link="/game/room1" class="lobby-link room">Room1</a>
+  <a href="/game/room2" router-link="/game/room2" class="lobby-link room">Room2</a>
+  <a href="/game/room3" router-link="/game/room3" class="lobby-link room">Room3</a>
+  <a href="/game/room4" router-link="/game/room4" class="lobby-link room">Room4</a>
+  <a href="/" router-link="/" class="lobby-link lobby-leave">Disconnect</a>
+</div>`;
+
 
 
 
 export const chatTemplate = `
-<button class="openChatB" id="openChatB">Ingame-Chat</button>
+<button class="openChatB" id="openChatB"></button>
 <div class="chatPopup" id="chat">
-  <h1>Ingame-Chat</h1>
+  <h1 class="chatHeadline"></h1>
   <div id="chatBox">
   </div>
   <form id="chatForm" class="chatForm">

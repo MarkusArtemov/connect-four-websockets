@@ -1,4 +1,4 @@
-export function setupGame(socket, assignedColor, currentUserList, room) {
+export function setupGame(socket, assignedColor, room) {
 
   console.log("Setting up game...." + assignedColor);
   const gameStatus = document.querySelector('.game-status');
@@ -28,7 +28,7 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
       event.preventDefault();
       if (redTurn === (color === "red")) {
         addChip(index);
-        socket.emit("game message", { content: { type: "turn", info: index }, to: "room1" })
+        socket.emit("game message", { content: { type: "turn", info: index }, to: room })
       }
     });
     field.addEventListener('dragover', (event) => {
@@ -124,7 +124,7 @@ export function setupGame(socket, assignedColor, currentUserList, room) {
     popupContainer.classList.add("setVisible");
     document.querySelector('.winning-message').textContent = getWinningMessage();
     restartButton.addEventListener("click", function () {
-      socket.emit("game message", { content: { type: "restart" }, to: "room1" });
+      socket.emit("game message", { content: { type: "restart" }, to: room });
       if (restartButton.innerHTML === "Restart") {
         restartButton.innerHTML = "Restart requested: waiting on opponent..."
       } else if (restartButton.innerHTML === "Restart? Opponent requested rematch") {

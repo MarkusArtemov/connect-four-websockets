@@ -301,7 +301,7 @@ h1.lobby {
   margin-top: 100px; 
 }
 
-.room {
+.lobby-link {
   display: grid;
   background-color: #1a1717;
   border-radius: 7px;
@@ -318,6 +318,11 @@ h1.lobby {
 }
 
 .room:hover {
+  background-color: #67c265;
+  color: rgb(66, 66, 66);
+}
+
+.lobby-leave:hover{
   background-color: #c26578;
   color: rgb(66, 66, 66);
 }

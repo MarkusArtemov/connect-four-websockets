@@ -1,5 +1,6 @@
 export function setupChat(socket, currentUList, room) {
     const chat = document.getElementById("chat");
+    const chatHeadline = document.querySelector(".chatHeadline")
     const closeChatB = document.getElementById("closeChatB");
     const openChatB = document.getElementById("openChatB")
     const sendMessageB = document.getElementById("sendMessageB");
@@ -22,6 +23,8 @@ export function setupChat(socket, currentUList, room) {
 
     //check what type of chat and implement functionality accordingly
     if (room === "public") {
+        openChatB.innerHTML= "Lobby-Chat";
+        chatHeadline.innerHTML= "Lobby-Chat";
         chatForm.onsubmit = (event) => {
             event.preventDefault();
             const text = chatInput.value;
@@ -36,11 +39,12 @@ export function setupChat(socket, currentUList, room) {
             chatInput.value = "";
         });
     } else {
-
+        openChatB.innerHTML= "Ingame-Chat";
+        chatHeadline.innerHTML= "Ingame-Chat";
         chatForm.onsubmit = (event) => {
             event.preventDefault();
             const text = chatInput.value;
-            socket.emit("room message", { content: text, room: "room1" })
+            socket.emit("room message", { content: text, room: room })
         };
 
         socket.on("room message", ({ content, from }) => {
@@ -51,9 +55,6 @@ export function setupChat(socket, currentUList, room) {
             chatInput.value = "";
         });
     }
-
-
-
 
 
     socket.on("user connected", (user) => {

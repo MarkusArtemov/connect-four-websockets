@@ -7,32 +7,10 @@ import { setupChat } from "./chat.mjs";
 
     let username; 
     let userList = [];
+    let currentRoom = "";
 
 export function setup() {
-    // connection setting. do not autoconnect, we need to set username first
-
-    // function to get username for user id
-    function getUsernameFromID(id) {
-        for (const { userID, username } of userList) {
-            if (userID === id) return username;
-        }
-        return "anonymous";
-    }
-
-
-
-    /*
-      we can join a room - there are 4 rooms available
-      room1, room2, room3 and room4
-      these are for playing a round of connect four
-      thus only 2 users can join
-      if we can join, the server will send a join accept event
-      when we can not join the server will send join reject
-    */
-   //socket.emit("join room", { room: "room1" }); //TO-DO: add lobby screen, add connect overlay for lobby. add room-option for lobby!
-
-
-
+    
     //////////////Events//////////////
 
     // For debug purpose only
@@ -49,13 +27,14 @@ export function setup() {
     socket.on("join accept", ({room, roomUsers}) => {
         setupChat(socket, userList, room);
         if(roomUsers[0].userID === socket.id){
-            setupGame(socket, "red");
+            setupGame(socket, "red", room);
         }else{
-            setupGame(socket, "yellow");
+            setupGame(socket, "yellow", room);
         }
     });
 
     socket.on("leave accept", () => {
+        setupChat(socket, userList, "public");
     });
 
     socket.on("disconnect", (reason) => {
@@ -104,12 +83,16 @@ export function setup() {
 
 
 export function joinRoom(roomName) {
-        socket.emit("join room", { room: roomName })
-  }
+    socket.emit("join room", { room: roomName });
+    currentRoom = roomName;
+}
 
-export function leaveRoom(roomName) {
-        socket.emit("leave room", { room: roomName });
-  }
+export function leaveRoom() {
+    if(currentRoom != ""){
+        socket.emit("leave room", { room: currentRoom});
+        currentRoom = "";
+    }
+}
 
   export function connectWithServer(){
     if (socket.connected) {
@@ -120,4 +103,8 @@ export function leaveRoom(roomName) {
     socket.auth = { username };
     socket.connect();
     console.log("Connecting...");
+}
+
+export function disconnect(){
+    socket.disconnect();
 }
