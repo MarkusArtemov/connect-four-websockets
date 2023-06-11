@@ -10,7 +10,7 @@ export function setupChat(socket, currentUList, room) {
     let userList = currentUList;
 
 
-
+    
     closeChatB.addEventListener("click", () => {
         chat.style.display = "none";
     });
@@ -23,8 +23,8 @@ export function setupChat(socket, currentUList, room) {
 
     //check what type of chat and implement functionality accordingly
     if (room === "public") {
-        openChatB.innerHTML= "Lobby-Chat";
-        chatHeadline.innerHTML= "Lobby-Chat";
+        openChatB.innerHTML = "Lobby-Chat";
+        chatHeadline.innerHTML = "Lobby-Chat";
         chatForm.onsubmit = (event) => {
             event.preventDefault();
             const text = chatInput.value;
@@ -39,8 +39,8 @@ export function setupChat(socket, currentUList, room) {
             chatInput.value = "";
         });
     } else {
-        openChatB.innerHTML= "Ingame-Chat";
-        chatHeadline.innerHTML= "Ingame-Chat";
+        openChatB.innerHTML = "Ingame-Chat";
+        chatHeadline.innerHTML = "Ingame-Chat";
         chatForm.onsubmit = (event) => {
             event.preventDefault();
             const text = chatInput.value;
@@ -59,7 +59,6 @@ export function setupChat(socket, currentUList, room) {
 
     socket.on("user connected", (user) => {
         userList.push(user);
-        //console.log("User connected: " + user.username);
     });
 
 

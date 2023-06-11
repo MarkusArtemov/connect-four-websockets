@@ -9,10 +9,6 @@ export function setupGame(socket, assignedColor, room) {
   const popupContainer = document.querySelector('.popup-container');
   const winnerSound = document.getElementById('winnerSound');
 
-  //Added consts///
-
-  ///end added consts//
-
   const NUMBER_OF_COLUMNS = 7;
   const NUMBER_OF_ROWS = 6;
 
@@ -70,12 +66,6 @@ export function setupGame(socket, assignedColor, room) {
 
   });
 
-  //TO-DO: remove when router is ready!
-  socket.on("leave accept", () => {
-    restartGame();
-    gameStatus.innerHTML = "Router: game not visible!"
-  });
-
 
   //////////////End Socket Events//////////////
 
@@ -97,7 +87,7 @@ export function setupGame(socket, assignedColor, room) {
     }
     if (checkWin(insertedRow, column) || checkDraw()) {
       showPopup()
-      checkWin(insertedRow,column) && winnerSound.play();
+      checkWin(insertedRow, column) && winnerSound.play();
       return;
     }
     changeTurn();
@@ -109,13 +99,13 @@ export function setupGame(socket, assignedColor, room) {
       setTimeout(() => {
         const field = gameBoard.get(calculateCurrentIndex(row, column));
         field.classList.add(currentChip);
-  
+
         if (row < insertedRow) {
           setTimeout(() => {
             field.classList.remove(currentChip);
           }, 500);
         }
-      }, (row*100)); 
+      }, (row * 100));
     }
   }
 

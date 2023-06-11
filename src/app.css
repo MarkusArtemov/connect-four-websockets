@@ -1,13 +1,13 @@
 /* index */
 
-*{
+* {
   box-sizing: border-box;
   font-family: sans-serif;
   padding: 0;
   margin: 0;
 }
 
-body{
+body {
   width: 100vw;
   height: 100vh;
   display: grid;
@@ -15,7 +15,7 @@ body{
   grid-template-rows: 15vh 1fr;
 }
 
-#container{
+#container {
   height: 100vh;
   width: 100vw;
   display: grid;
@@ -62,9 +62,9 @@ a {
   margin: 5px;
 }
 
- /* game */
+/* game */
 
-.game{
+.game {
   width: 100%;
   height: 100%;
   display: grid;
@@ -72,13 +72,14 @@ a {
   grid-template-rows: 20% 80%;
 }
 
-.game-information{
+.game-information {
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
   align-items: center;
 }
 
-.red-chip, .yellow-chip{
+.red-chip,
+.yellow-chip {
   width: 8vmin;
   height: 8vmin;
   border-radius: 50%;
@@ -89,35 +90,35 @@ a {
   opacity: 0.5;
 }
 
-.red-chip{
+.red-chip {
   background-color: red;
 
 }
 
-.yellow-chip{
+.yellow-chip {
   background-color: yellow;
 }
 
-.game-status{
+.game-status {
   font-size: 5vmin;
   font-family: sans-serif;
 }
 
-.game-field{
+.game-field {
   border-radius: 50%;
   background-color: white;
 }
 
-.red{
+.red {
   background-color: red;
 }
 
-.yellow{
+.yellow {
   background-color: yellow;
 }
 
 
-.game-board{
+.game-board {
   display: grid;
   place-content: center;
   width: 70vmin;
@@ -137,7 +138,7 @@ a {
   display: none;
 }
 
-.setVisible{
+.setVisible {
   display: flex;
 }
 
@@ -160,13 +161,13 @@ a {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
-.winning-message{
+.winning-message {
   text-align: center;
   font-size: 24px;
-  font-weight:600;
+  font-weight: 600;
 }
 
-.restartButton{
+.restartButton {
   color: rgb(255, 255, 255);
   background-color: rgb(76, 75, 154);
   border-radius: 7px;
@@ -183,19 +184,21 @@ a {
   background-color: white;
 }
 
-#connectDiv > h2 {
+#connectDiv>h2 {
   margin-bottom: 5vw;
   color: greenyellow;
 }
 
-#socketConnectB, #roomJoinB {
+#socketConnectB,
+#roomJoinB {
   background-color: green;
   padding: 1vw;
   color: white;
   margin: 0vw 5vw;
 }
 
-#socketDisconnectB, #roomLeaveB {
+#socketDisconnectB,
+#roomLeaveB {
   background-color: red;
   padding: 1vw;
   color: white;
@@ -235,7 +238,7 @@ a {
   bottom: 0;
 }
 
-.chatPopup > h1 {
+.chatPopup>h1 {
   margin-top: 0vw;
   padding: 0vw;
   font-size: larger;
@@ -249,7 +252,7 @@ a {
 }
 
 /* Full-width textarea */
-.chatForm > textarea {
+.chatForm>textarea {
   width: 100%;
   padding: 1vw;
   margin: 1vw 0 1vw 0;
@@ -259,30 +262,30 @@ a {
 }
 
 /* When the textarea gets focus, do something */
-.chatForm > textarea:focus {
+.chatForm>textarea:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
-.chatForm > button {
+.chatForm>button {
   background-color: #04AA6D;
   color: white;
   padding: 0.5vw 0.5vw;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:0.2vw;
+  margin-bottom: 0.2vw;
   opacity: 0.8;
 }
 
 /* Add a red background color to the cancel button */
-.chatForm > .closeChatB {
+.chatForm>.closeChatB {
   background-color: red;
 }
 
 /* Add some hover effects to buttons */
-.chatForm > button:hover {
+.chatForm>button:hover {
   opacity: 1;
 }
 
@@ -296,9 +299,9 @@ h1.lobby {
 
 .room-container {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  margin-top: 100px; 
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
 }
 
 .lobby-link {
@@ -309,7 +312,7 @@ h1.lobby {
   margin: 10px;
   padding: 1rem;
   width: 50vw;
-  position: relative; 
+  position: relative;
 }
 
 .room {
@@ -322,7 +325,7 @@ h1.lobby {
   color: rgb(66, 66, 66);
 }
 
-.lobby-leave:hover{
+.lobby-leave:hover {
   background-color: #c26578;
   color: rgb(66, 66, 66);
 }
@@ -365,8 +368,3 @@ h1.lobby {
 .connectWithSocket:active {
   background-color: #3e8e41;
 }
-
-
-
-
-

@@ -2,33 +2,26 @@ import { io } from "socket.io-client";
 import { setupGame } from "./game.mjs";
 import { setupChat } from "./chat.mjs";
 
-    const URL = "http://localhost:3001";
-    const socket = io(URL, { autoConnect: false });
+const URL = "http://localhost:3001";
+const socket = io(URL, { autoConnect: false });
 
-    let username; 
-    let userList = [];
-    let currentRoom = "";
+let username;
+let userList = [];
+let currentRoom = "";
 
 export function setup() {
-    
-    //////////////Events//////////////
 
-    // For debug purpose only
-    socket.onAny((event, arg1, ...args) => {
-        console.log(event, JSON.stringify(arg1), JSON.stringify(args));
+    //////////////Events//////////////
+    socket.on("connect", () => {
+
     });
 
-    socket.on("connect", () => {
-        console.log("läuft doch");
-        
-        });
 
-
-    socket.on("join accept", ({room, roomUsers}) => {
+    socket.on("join accept", ({ room, roomUsers }) => {
         setupChat(socket, userList, room);
-        if(roomUsers[0].userID === socket.id){
+        if (roomUsers[0].userID === socket.id) {
             setupGame(socket, "red", room);
-        }else{
+        } else {
             setupGame(socket, "yellow", room);
         }
     });
@@ -65,20 +58,18 @@ export function setup() {
     */
     socket.on("user connected", (user) => {
         userList.push(user);
-        //console.log("User connected: " + user.username);
     });
 
     socket.on("user joined", (user) => {
-        if(user.userID == socket.id){
+        if (user.userID == socket.id) {
             console.log("You joined a room");
-        }else{
+        } else {
             console.log("user joined the room: " + user.username);
         }
-        //console.log("user jouined room: " + user.username);
     })
 
     //////////////End Events//////////////
-    
+
 }
 
 
@@ -88,13 +79,13 @@ export function joinRoom(roomName) {
 }
 
 export function leaveRoom() {
-    if(currentRoom != ""){
-        socket.emit("leave room", { room: currentRoom});
+    if (currentRoom != "") {
+        socket.emit("leave room", { room: currentRoom });
         currentRoom = "";
     }
 }
 
-  export function connectWithServer(){
+export function connectWithServer() {
     if (socket.connected) {
         console.log('Already connected');
         return;
@@ -105,6 +96,6 @@ export function leaveRoom() {
     console.log("Connecting...");
 }
 
-export function disconnect(){
+export function disconnect() {
     socket.disconnect();
 }

@@ -64,7 +64,8 @@ export const gameTemplate = `
 
 
 export const lobbyTemplate = `
-<h1>Lobby</h1>
+<h1>4 Wins</h1>
+<h2>Lobby</h2>
 <div class="room-container">
   <a href="/game/room1" router-link="/game/room1" class="lobby-link room">Room1</a>
   <a href="/game/room2" router-link="/game/room2" class="lobby-link room">Room2</a>
@@ -91,18 +92,10 @@ export const chatTemplate = `
 
 export const homeTemplate = `
 <div class="home">
-<p>Mit WebSocket verbinden?</p>
-<a href="/lobby" router-link="/lobby" class="connectWithSocket onclick="connectWithServer()">Verbinden</a>
+<h1>4 Wins Online</h1>
+<a href="/lobby" router-link="/lobby" class="connectWithSocket onclick="connectWithServer()">Connect</a>
 </div>`
 
 
-const connectionTemplate = `
-<div class="container">
-    <div id="connectDiv">
-      <button id="socketConnectB">Connect!</button>
-      <button id="socketDisconnectB" visibility="hidden">Disconnect!</button>
-      <button id="roomJoinB" visibility="hidden">Join Room!</button>
-      <button id="roomLeaveB">Leave Room!</button>
-    </div>`;
 
 

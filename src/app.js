@@ -11,14 +11,14 @@ import { homeTemplate } from "./templates.mjs";
 const router = new Router(document.getElementById("container"));
 
 router.register(`/`, new MyComponent(homeTemplate, () => {
-    disconnect();
-  }, router));
+  disconnect();
+}, router));
 
-  
+
 router.register(`/lobby`, new MyComponent(`${lobbyTemplate}${chatTemplate}`, () => {
-    connectWithServer();
-    leaveRoom();
-  }, router));
+  connectWithServer();
+  leaveRoom();
+}, router));
 
 const rooms = ["room1", "room2", "room3", "room4"];
 
