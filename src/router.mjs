@@ -6,7 +6,12 @@ export class Router {
         this.container = container;
         this.routes = new Map();
         this.routes.set(404, new MyComponent("<p>Not Found</p>"));
-        this.handlers = new Map();
+
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.path) {
+                this.navTo(event.state.path);
+            }
+        });
     }
 
     register(route, component) {
@@ -15,16 +20,23 @@ export class Router {
 
     navTo(route) {
         const component = this.routes.get(route) ?? this.routes.get(404);
-        component.mount(this.container);
 
-        if (this.handlers.has(route)) {
-            const handler = this.handlers.get(route);
-            handler();
+        if (!window.history.state || window.history.state.path !== route) {
+            window.history.pushState({ path: route }, '', route);
+        }
+
+        component.mount(this.container);
+        this.setupRouter(); 
+    }
+
+    setupRouter() {
+        const routerLinks = document.querySelectorAll("[router-link]");
+        for (const link of routerLinks) {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const route = link.getAttribute("router-link");
+                this.navTo(route);
+            });
         }
     }
-
-    on(route, handler) {
-        this.handlers.set(route, handler);
-    }
 }
-
