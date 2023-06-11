@@ -1,5 +1,6 @@
 
 export const gameTemplate = `
+<img id="profile" src="">
 <a href="/lobby" router-link="/lobby" id="roomLeaveB">Leave Room!</a>
 <div class="game">
 <div class="game-information">
@@ -64,15 +65,17 @@ export const gameTemplate = `
 
 
 export const lobbyTemplate = `
-<h1>4 Wins</h1>
-<h2>Lobby</h2>
+  <img id="profile" src="">
+<h1>Lobby</h1>
 <div class="room-container">
   <a href="/game/room1" router-link="/game/room1" class="lobby-link room">Room1</a>
   <a href="/game/room2" router-link="/game/room2" class="lobby-link room">Room2</a>
   <a href="/game/room3" router-link="/game/room3" class="lobby-link room">Room3</a>
   <a href="/game/room4" router-link="/game/room4" class="lobby-link room">Room4</a>
   <a href="/" router-link="/" class="lobby-link lobby-leave">Disconnect</a>
-</div>`;
+</div>
+`;
+
 
 
 
@@ -92,9 +95,10 @@ export const chatTemplate = `
 
 export const homeTemplate = `
 <div class="home">
-<h1>4 Wins Online</h1>
-<a href="/lobby" router-link="/lobby" class="connectWithSocket onclick="connectWithServer()">Connect</a>
+<p>Mit WebSocket verbinden?</p>
+<a href="/lobby" router-link="/lobby" class="connectWithSocket onclick="connectWithServer()">Verbinden</a>
 </div>`
+
 
 
 
