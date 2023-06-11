@@ -87,11 +87,14 @@ export function setupGame(socket, assignedColor, room) {
     }
     if (checkWin(insertedRow, column) || checkDraw()) {
       showPopup()
-      checkWin(insertedRow, column) && winnerSound.play();
+      if (checkWin(insertedRow, column) && color === currentChip) {
+        winnerSound.play();
+      }
       return;
     }
     changeTurn();
   }
+  
 
 
   function animateChipDrop(column, currentChip, insertedRow) {
