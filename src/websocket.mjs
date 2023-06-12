@@ -15,8 +15,9 @@ export function setup(router) {
   //////////////Events//////////////
 
 
-  socket.on("connect", () => {
-
+  socket.on("connected", ({ ownUserID, ownUsername }) => {
+    console.log("connected:" + ownUsername);
+    username = ownUsername;
     router.navTo("/lobby");
     loadProfilePicture(username);
   });

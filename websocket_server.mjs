@@ -21,7 +21,7 @@ export function setup() {
 
   io.on("connection", (socket) => {
     console.log(`Client connected with id: ${socket.id} and username: ${socket.username}`)
-    socket.emit("connected", { ownUserID: socket.id });
+    socket.emit("connected", { ownUserID: socket.id, ownUsername: socket.username });
 
     // inform newly connected user about currently connected users;
     const users = [];
@@ -120,3 +120,4 @@ export function setup() {
 
   console.log("Websocket Server listening on ws://127.0.0.1:3001")
 }
+
