@@ -12,20 +12,20 @@ const router = new Router(document.getElementById("container"));
 
 router.register(`/`, new MyComponent(homeTemplate, () => {
   disconnect();
-}, router));
+}));
 
 
 router.register(`/lobby`, new MyComponent(`${lobbyTemplate}${chatTemplate}`, () => {
   connectWithServer();
   leaveRoom();
-}, router));
+}));
 
 const rooms = ["room1", "room2", "room3", "room4"];
 
 for (const room of rooms) {
   router.register(`/game/${room}`, new MyComponent(`${gameTemplate}${chatTemplate}`, () => {
     joinRoom(room);
-  }, router));
+  }));
 }
 
 
