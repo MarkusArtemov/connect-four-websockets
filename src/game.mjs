@@ -94,7 +94,7 @@ export function setupGame(socket, assignedColor, room) {
     }
     changeTurn();
   }
-  
+
 
 
   function animateChipDrop(column, currentChip, insertedRow) {

@@ -1,4 +1,5 @@
 import { MyComponent } from "./component.mjs";
+import { socket } from "./websocket.mjs";
 
 export class Router {
 
@@ -26,7 +27,7 @@ export class Router {
         }
 
         component.mount(this.container);
-        this.setupRouter(); 
+        this.setupRouter();
     }
 
     setupRouter() {
@@ -35,8 +36,21 @@ export class Router {
             link.addEventListener("click", (e) => {
                 e.preventDefault();
                 const route = link.getAttribute("router-link");
-                this.navTo(route);
+
+                if (route.startsWith("/game/")) {
+                    const room = route.substring(route.length - 5);
+                    socket.emit("join room", { room });
+                } else if (route.startsWith("/lobby")) {
+                    const username = prompt("Please enter Username", "kalle");
+                    socket.auth = { username };
+                    socket.connect();
+                } else {
+                    this.navTo(route);
+                }
+
             });
         }
     }
+
+
 }

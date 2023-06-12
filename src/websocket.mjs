@@ -4,25 +4,29 @@ import { setupChat } from "./chat.mjs";
 import { loadProfilePicture } from "./profile.mjs";
 
 const URL = "http://localhost:3001";
-const socket = io(URL, { autoConnect: false });
+export const socket = io(URL, { autoConnect: false });
 
 let username;
 let userList = [];
 let currentRoom = "";
 
 
-export function setup() {
+export function setup(router) {
   //////////////Events//////////////
 
-  // For debug purpose only
-  socket.onAny((event, arg1, ...args) => {
-    console.log(event, JSON.stringify(arg1), JSON.stringify(args));
+
+  socket.on("connect", () => {
+
+    router.navTo("/lobby");
+    loadProfilePicture(username);
   });
 
-  socket.on("connect", () => {});
 
   socket.on("join accept", ({ room, roomUsers }) => {
+    router.navTo("/game/" + room);
     setupChat(socket, userList, room);
+    currentRoom = room;
+    loadProfilePicture(username);
     if (roomUsers[0].userID === socket.id) {
       setupGame(socket, "red", room);
     } else {
@@ -71,12 +75,6 @@ export function setup() {
   //////////////End Events//////////////
 }
 
-export function joinRoom(roomName) {
-  socket.emit("join room", { room: roomName });
-
-  currentRoom = roomName;
-  loadProfilePicture(username);
-}
 
 export function leaveRoom() {
   if (currentRoom != "") {
@@ -86,18 +84,3 @@ export function leaveRoom() {
   }
 }
 
-export function connectWithServer() {
-  if (socket.connected) {
-    console.log("Already connected");
-    return;
-  }
-  username = prompt("Please enter Username", "kalle");
-  socket.auth = { username };
-  socket.connect();
-  console.log("Connecting...");
-  loadProfilePicture(username);
-}
-
-export function disconnect() {
-  socket.disconnect();
-}
