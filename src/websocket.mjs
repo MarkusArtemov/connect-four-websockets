@@ -36,7 +36,10 @@ export function setup(router) {
   });
 
   socket.on("leave accept", ({ room }) => {
+    router.navTo("/lobby");
+    loadProfilePicture(username);
     setupChat(socket, userList, "public");
+    console.log("raus");
   });
 
   socket.on("disconnect", (reason) => {
